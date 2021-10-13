@@ -1,7 +1,7 @@
 const { graphqlHTTP } = require("express-graphql");
 
 //?typedefs
-const schema = require("./typedefs");
+const schema = require("./typedefs"); //NormalResponse is in _common.type.js file
 
 //?queries
 const { getEvents } = require("./queries/event.query");
@@ -11,7 +11,6 @@ const { getUsers } = require("./queries/user.query");
 const { createEvent } = require("./mutations/event.mutation");
 const { createUser } = require("./mutations/user.mutation");
 
-//resolvers
 var root = {
   events: getEvents,
   createEvent: createEvent,
@@ -22,6 +21,15 @@ const graphql = graphqlHTTP({
   schema: schema,
   rootValue: root,
   graphiql: true,
+  customFormatError: (err) => {
+    return {
+      success: false,
+      invalid: false,
+      error: true,
+      message: err.message,
+      errros: [],
+    };
+  },
 });
 
 module.exports = graphql;

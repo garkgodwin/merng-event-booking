@@ -5,16 +5,25 @@ var types = `
         password: String
     }
 
+    type UserArrayResponse{
+        success: Boolean!,
+        invalid: Boolean!,
+        error: Boolean!,
+        message: String!,
+        errors: [String!]!,
+        users: [User!]!
+    }
+
     input UserInput{
         email: String!
         password: String!
     }
 `;
 var queries = `
-        users: [User!]!
+        users: UserArrayResponse
     `;
 var mutations = `
-        createUser(userInput: UserInput): User 
+        createUser(userInput: UserInput): NormalResponse
     `;
 var typeUser = {
   types,

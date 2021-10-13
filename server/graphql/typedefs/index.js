@@ -1,12 +1,15 @@
 const { buildSchema } = require("graphql");
 
-//?types
+//*types
 const typeUser = require("./user.type");
 const typeEvent = require("./event.type");
+//?_common typedef
+const typeCommon = require("./_common.type");
 
 var schema = buildSchema(`
     ${typeEvent.types}
     ${typeUser.types}
+    ${typeCommon.types}
     
 type RootQuery {
     ${typeEvent.queries}
