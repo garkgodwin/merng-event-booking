@@ -12,9 +12,9 @@ const { createEvent } = require("./mutations/event.mutation");
 const { createUser } = require("./mutations/user.mutation");
 
 var root = {
-  events: getEvents,
+  getEvents: getEvents,
   createEvent: createEvent,
-  users: getUsers,
+  getUsers: getUsers,
   createUser: createUser,
 };
 const graphql = graphqlHTTP({

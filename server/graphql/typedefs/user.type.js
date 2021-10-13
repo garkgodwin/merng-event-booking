@@ -20,7 +20,7 @@ var types = `
     }
 `;
 var queries = `
-        users: UserArrayResponse
+        getUsers: UserArrayResponse
     `;
 var mutations = `
         createUser(userInput: UserInput): NormalResponse

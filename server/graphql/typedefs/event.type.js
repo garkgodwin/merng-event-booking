@@ -26,7 +26,7 @@ var types = `
 `;
 //!TODO change back the creator:String to creator:String! to active no nullable input
 var queries = `
-        events: EventArrayResponse
+        getEvents: EventArrayResponse
     `;
 var mutations = `
     createEvent(eventInput: EventInput): NormalResponse
