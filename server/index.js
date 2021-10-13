@@ -26,3 +26,6 @@ const main = async () => {
 };
 
 main();
+
+//TODO: MAKE ERROR HANDLING
+//TODO: LEARN MIDDLEWARES FOR GRAPHQL
