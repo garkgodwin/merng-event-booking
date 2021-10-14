@@ -4,13 +4,14 @@ import React from "react";
 import "./App.css";
 
 //?COMPONENTS
-import Navbar from "./components/navbar/Navbar";
+import Navbar from "./components/Navbar";
+import Pages from "./pages";
 
 const App = () => {
   return (
     <div className="App">
-      <h1>App Component</h1>
       <Navbar />
+      <Pages />
     </div>
   );
 };

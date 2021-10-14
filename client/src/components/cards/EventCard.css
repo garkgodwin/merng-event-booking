@@ -1,0 +1,12 @@
+.EventCard{
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    background-color: var(--white-1);
+    color: var(--black-1);
+    box-shadow: 0 0 8px var(--black-2);
+    margin: 8px;
+}
