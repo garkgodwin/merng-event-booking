@@ -6,8 +6,15 @@ const app = express();
 const graphql = require("./graphql");
 const isAuth = require("./middlewares/auth");
 
-app.use(express.json());
 //?======================+MIDDLEWARES
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+//?set client url to access server
+const corsOptions = {
+  credentials: true,
+  origin: "http://localhost:3000",
+};
+app.use(cors(corsOptions));
 app.use(isAuth);
 //?======================+GRAPH QL+=================
 app.use("/graphql", graphql);
