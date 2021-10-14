@@ -3,7 +3,7 @@ const User = db.users;
 const bcrypt = require("bcryptjs");
 const { mongooseErrors } = require("../../handlers/errorHandlers");
 
-const createUser = (args) => {
+const createUser = async (args) => {
   let response = {
     success: false,
     invalid: false,
@@ -16,7 +16,7 @@ const createUser = (args) => {
   const userType = userInput.userType;
   const email = userInput.email;
   const password = userInput.password;
-  return bcrypt
+  await bcrypt
     .hash(password, 12)
     .then((result) => {
       return User.create({

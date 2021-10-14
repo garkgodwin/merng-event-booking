@@ -1,18 +1,24 @@
+
 query{
-  getUsers{
+ 	 getUsers{
     users{
       _id
       userType
+      
       name{
         first
-        middle
-        last
       }
       email
-      password
       createdEvents{
         _id
+        title
+        description
+        price
+        createdAt
+        updatedAt
       }
+      createdAt
+      updatedAt
     }
   }
 }

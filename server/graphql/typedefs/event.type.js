@@ -4,8 +4,9 @@ var types = `
         title: String!
         description: String!
         price: Float!
-        date: String!
         creator: User!
+        createdAt: String!
+        updatedAt: String!
     }
     type EventArrayResponse{
         success: Boolean!,
@@ -19,7 +20,6 @@ var types = `
         title: String!
         description: String!
         price: Float!
-        date: String!
         creator: String!
     }
     
