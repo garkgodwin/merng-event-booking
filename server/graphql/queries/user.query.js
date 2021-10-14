@@ -7,7 +7,8 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 module.exports = {
-  getUsers: async () => {
+  //?ONLY ADMIN CAN ACCESS GET USERS
+  getUsers: async (args, req) => {
     let response = {
       success: false,
       invalid: false,
@@ -16,26 +17,42 @@ module.exports = {
       errors: [],
       users: [],
     };
-    await User.find()
-      .populate("createdEvents")
-      .then((users) => {
+    if (req.isAuth) {
+      if (req.userType === 1) {
+        await User.find()
+          .populate("createdEvents")
+          .then((users) => {
+            response = {
+              ...response,
+              success: true,
+              message: "Fetched users.",
+              users: users,
+            };
+          })
+          .catch((error) => {
+            response = {
+              ...response,
+              error: true,
+              message: "Encountered an error while fetching users.",
+            };
+            if (error.name.includes("Mongo")) {
+              return mongooseErrors(error, response);
+            }
+          });
+      } else {
         response = {
           ...response,
-          success: true,
-          message: "Fetched users.",
-          users: users,
+          invalid: true,
+          message: "User is not an admin.",
         };
-      })
-      .catch((error) => {
-        response = {
-          ...response,
-          error: true,
-          message: "Encountered an error while fetching users.",
-        };
-        if (error.name.includes("Mongo")) {
-          return mongooseErrors(error, response);
-        }
-      });
+      }
+    } else {
+      response = {
+        ...response,
+        invalid: true,
+        message: "User is not logged in!",
+      };
+    }
     return response;
   },
   login: async (args) => {

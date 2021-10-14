@@ -4,10 +4,11 @@ const cors = require("cors");
 const app = express();
 
 const graphql = require("./graphql");
+const isAuth = require("./middlewares/auth");
 
-//?======================+MIDDLEWARES
 app.use(express.json());
-
+//?======================+MIDDLEWARES
+app.use(isAuth);
 //?======================+GRAPH QL+=================
 app.use("/graphql", graphql);
 
