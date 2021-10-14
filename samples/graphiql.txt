@@ -1,28 +1,21 @@
-
-
 query{
   getUsers{
-    success
-    invalid
-    error
-    message
-    errors
     users{
+      _id
+      userType
+      name{
+        first
+        middle
+        last
+      }
       email
-      _id
-     createdEvents{
-      _id
-      title
-      description
-      price
-      date
+      password
+      createdEvents{
+        _id
+      }
     }
-   }
- }
+  }
 }
-
-#query get users result: ["6167a8d5aa053b3c823dfdff"]
-
 query{
   getEvents{
     success
@@ -47,6 +40,7 @@ query{
 
 # mutations
 
+#6167e616511e501a4958e12c
 mutation{
   createEvent(eventInput: {
     title: "A title",
@@ -63,16 +57,21 @@ mutation{
   }
 }
 
-
 mutation{
-  createUser(userInput:{
-    email: "garkgodwinduque@gmail.com",
-    password: "pass123"
-  }){
-    success
-    invalid
-    error
-    message
-    errors
+createUser(userInput: {
+  nameInput: {
+    first: "John",
+    middle: "Small",
+    last: "Smith"
   }
+  userType: 2,
+  email: "john@gmail.com",
+  password: "john123",
+}){
+  success
+  invalid
+  error
+  message
+  errors
+}
 }

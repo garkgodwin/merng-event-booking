@@ -11,11 +11,22 @@ const createUser = (args) => {
     message: "",
     errors: [],
   };
+  const userInput = args.userInput;
+  const nameInput = userInput.nameInput;
+  const userType = userInput.userType;
+  const email = userInput.email;
+  const password = userInput.password;
   return bcrypt
-    .hash(args.userInput.password, 12)
+    .hash(password, 12)
     .then((result) => {
       return User.create({
-        email: args.userInput.email,
+        userType: userType,
+        name: {
+          first: nameInput.first,
+          middle: nameInput.middle,
+          last: nameInput.last,
+        },
+        email: email,
         password: result,
       });
     })

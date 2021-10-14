@@ -7,8 +7,9 @@ const userSchema = Schema({
     min: [1, "Out of range"],
     max: [3, "Out of range"],
     required: "User type is required.",
+    defaultValue: 3,
   },
-  fullName: new Schema({
+  name: new Schema({
     first: {
       type: String,
       required: "First name is required.",
@@ -18,9 +19,6 @@ const userSchema = Schema({
       type: String,
       required: "Last name is required.",
     },
-    prefix: String,
-    suffix: String,
-    titles: [String],
   }),
   email: {
     type: String,

@@ -3,9 +3,6 @@ var types = `
         first: String!
         middle: String
         last: String!
-        suffix: String
-        prefix: String
-        titles: [String!]!
     }
 
     type User {
@@ -26,7 +23,14 @@ var types = `
         users: [User!]!
     }
 
+    input NameInput{
+        first: String!
+        middle: String
+        last: String!
+    }
     input UserInput{
+        userType: Int!
+        nameInput: NameInput!
         email: String!
         password: String!
     }
