@@ -1,6 +1,17 @@
 var types = `
+    type Name {
+        first: String!
+        middle: String
+        last: String!
+        suffix: String
+        prefix: String
+        titles: [String!]!
+    }
+
     type User {
         _id: ID!
+        userType: Int!
+        name: Name!
         email: String!
         password: String
         createdEvents: [Event!]!

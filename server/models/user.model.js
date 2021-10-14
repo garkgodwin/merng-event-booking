@@ -8,7 +8,7 @@ const userSchema = Schema({
     max: [3, "Out of range"],
     required: "User type is required.",
   },
-  name: new Schema({
+  fullName: new Schema({
     first: {
       type: String,
       required: "First name is required.",
@@ -18,7 +18,7 @@ const userSchema = Schema({
       type: String,
       required: "Last name is required.",
     },
-    preffix: String,
+    prefix: String,
     suffix: String,
     titles: [String],
   }),
