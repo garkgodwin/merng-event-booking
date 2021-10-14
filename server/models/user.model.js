@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 
 const userSchema = Schema({
-  type: {
+  userType: {
     type: Number,
     min: [1, "Out of range"],
     max: [3, "Out of range"],
