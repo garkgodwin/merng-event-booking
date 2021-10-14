@@ -12,6 +12,7 @@ const getEvents = () => {
     events: [], //[Event!]!
   };
   return Event.find({})
+    .populate("creator")
     .then((events) => {
       response = {
         ...response,

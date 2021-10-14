@@ -5,7 +5,7 @@ var types = `
         description: String!
         price: Float!
         date: String!
-        creator: String!
+        creator: User!
     }
     type EventArrayResponse{
         success: Boolean!,
@@ -24,10 +24,11 @@ var types = `
     }
     
 `;
+//?creator: is Schmea.Types.ObjectId = string
 //!TODO change back the creator:String to creator:String! to active no nullable input
 var queries = `
-        getEvents: EventArrayResponse
-    `;
+    getEvents: EventArrayResponse
+`;
 var mutations = `
     createEvent(eventInput: EventInput): NormalResponse
 `;

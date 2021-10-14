@@ -1,0 +1,78 @@
+
+
+query{
+  getUsers{
+    success
+    invalid
+    error
+    message
+    errors
+    users{
+      email
+      _id
+     createdEvents{
+      _id
+      title
+      description
+      price
+      date
+    }
+   }
+ }
+}
+
+#query get users result: ["6167a8d5aa053b3c823dfdff"]
+
+query{
+  getEvents{
+    success
+    invalid
+    error
+    message
+    errors
+    events{
+      _id
+      title
+      description
+      price
+      date
+      creator{
+        _id
+        email
+      }
+    }
+  }
+}
+
+
+# mutations
+
+mutation{
+  createEvent(eventInput: {
+    title: "A title",
+    description:"A short description...",
+    price: 50.24,
+    date: "Thu Oct 14 2021 12:05:17 GMT+0800",
+    creator: "6167a8d5aa053b3c823dfdff"
+  }){
+    success
+    invalid
+    error
+    message
+    errors
+  }
+}
+
+
+mutation{
+  createUser(userInput:{
+    email: "garkgodwinduque@gmail.com",
+    password: "pass123"
+  }){
+    success
+    invalid
+    error
+    message
+    errors
+  }
+}

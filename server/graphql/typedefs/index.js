@@ -7,8 +7,8 @@ const typeEvent = require("./event.type");
 const typeCommon = require("./_common.type");
 
 var schema = buildSchema(`
+${typeUser.types}
     ${typeEvent.types}
-    ${typeUser.types}
     ${typeCommon.types}
     
 type RootQuery {

@@ -3,6 +3,7 @@ var types = `
         _id: ID!
         email: String!
         password: String
+        createdEvents: [Event!]!
     }
 
     type UserArrayResponse{

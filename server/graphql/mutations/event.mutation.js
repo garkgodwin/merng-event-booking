@@ -11,17 +11,18 @@ const createEvent = (args) => {
     message: "",
     errors: [],
   };
+  const creator = args.eventInput.creator;
   const event = new Event({
     title: args.eventInput.title,
     description: args.eventInput.description,
     price: +args.eventInput.price,
     date: new Date(args.eventInput.date),
-    creator: "616690d7bc18757173177228", //TODO: FIX THIS
+    creator: creator,
   });
   return event
     .save()
     .then((result) => {
-      return User.findById("616690d7bc18757173177228");
+      return User.findById(creator);
     })
     .then((user) => {
       if (user) {

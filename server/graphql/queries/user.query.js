@@ -12,6 +12,7 @@ const getUsers = () => {
     users: [],
   };
   return User.find({})
+    .populate("createdEvents")
     .then((users) => {
       response = {
         ...response,
