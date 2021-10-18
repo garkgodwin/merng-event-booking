@@ -16,7 +16,7 @@ var types = `
         updatedAt: String!
     }
 
-    type UsersResponse{
+    type ResponseGetUsers{
         success: Boolean!
         invalid: Boolean!
         error: Boolean!
@@ -25,7 +25,7 @@ var types = `
         users: [User!]!
     }
 
-    type UserLoginResponse{
+    type ResponseLogin{
         success: Boolean!
         invalid: Boolean!
         error: Boolean!
@@ -33,6 +33,16 @@ var types = `
         errors: [String!]!
         token: String!
     }
+
+    type ResponseLoggedInData{
+        success: Boolean!
+        invalid: Boolean!
+        error: Boolean!
+        message: String!
+        errors: [String!]!
+        user: User!
+    }
+
 
     input NameInput{
         first: String!
@@ -51,8 +61,9 @@ var types = `
     }
 `;
 var queries = `
-        getUsers: UsersResponse
-        login(loginInput: LoginInput): UserLoginResponse
+        getUsers: ResponseGetUsers
+        login(loginInput: LoginInput): ResponseLogin
+        getLoggedInData(token: String!): ResponseLoggedInData
     `;
 var mutations = `
         createUser(userInput: UserInput): NormalResponse

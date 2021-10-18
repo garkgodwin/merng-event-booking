@@ -15,7 +15,7 @@ module.exports = {
     };
     if (req.isAuth) {
       if (req.userType === 2) {
-        const creator = req.userId;
+        const creator = req.userId; //got from auth middleware
         const event = new Event({
           title: args.eventInput.title,
           description: args.eventInput.description,
