@@ -43,30 +43,29 @@ var types = `
         user: User!
     }
 
-
-    input NameInput{
+    input InputName{
         first: String!
         middle: String
         last: String!
     }
-    input UserInput{
+    input InputUser{
         userType: Int!
-        nameInput: NameInput!
+        inputName: InputName!
         email: String!
         password: String!
     }
-    input LoginInput{
+    input InputCredentials{
         email: String!
         password: String!
     }
 `;
 var queries = `
         getUsers: ResponseGetUsers
-        login(loginInput: LoginInput): ResponseLogin
+        login(inputCredentials: InputCredentials!): ResponseLogin
         getLoggedInData(token: String!): ResponseLoggedInData
     `;
 var mutations = `
-        createUser(userInput: UserInput): NormalResponse
+        createUser(inputUser: InputUser!): NormalResponse
     `;
 var typeUser = {
   types,

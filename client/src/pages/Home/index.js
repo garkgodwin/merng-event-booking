@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
 //?queries
 import { GET_EVENTS } from "../../graphql/queries/event.queries";
