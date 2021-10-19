@@ -17,8 +17,5 @@ exports.mongooseErrors = (err, response) => {
       errorMessages.push(message);
     }
   }
-  return {
-    ...response,
-    errors: errorMessages,
-  };
+  return errorMessages;
 };

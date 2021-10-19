@@ -56,50 +56,26 @@ module.exports = {
     return response;
   },
   getLoggedInData: async (args, req) => {
-    let response = {
-      success: false,
-      invalid: false,
-      error: false,
-      message: "",
-      errors: [],
-      user: {},
-    };
     if (req.isAuth) {
       //?find user data
       await User.findOne({ _id: req.userId, email: req.email })
         .then((result) => {
-          console.log(result);
           if (result) {
-            response = {
-              ...response,
-              success: true,
-              message: "You are logged-in!",
-              user: result,
-            };
+            return result;
           } else {
-            response = {
-              ...response,
-              invalid: true,
-              message: "No user with such credentials.",
-            };
+            throw new Error("No user with such credentials.");
           }
         })
         .catch((error) => {
-          response = {
-            ...response,
-            error: true,
-            message: "Encountered an error while logging in.",
-          };
-          response = mongooseErrors(error, response);
+          if (error.message.includes("Mongo")) {
+            let errorMessages = mongooseErrors(error);
+            throw new Error(errorMessages);
+          }
+          throw new Error("Encountered an error while logging in.");
         });
     } else {
-      response = {
-        ...response,
-        invalid: true,
-        message: "Your credentials are invalid.",
-      };
+      throw new Error("Your credentials are invalid.");
     }
-    return response;
   },
   login: async (args) => {
     let response = {
