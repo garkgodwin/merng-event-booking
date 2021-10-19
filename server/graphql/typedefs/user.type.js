@@ -15,15 +15,6 @@ var types = `
         createdAt: String
         updatedAt: String
     }
-
-    type UserResponse{
-        success: Boolean!
-        invalid: Boolean!
-        error: Boolean!
-        message: String!
-        errors: [String!]!
-        user: User
-    }
     type TokenResponse{
         success: Boolean!
         invalid: Boolean!
@@ -52,7 +43,7 @@ var types = `
 `;
 var queries = `
         getUsers: User!
-        getLoggedInData: UserResponse
+        getLoggedInData: User!
         login(input: CredentialsInput): TokenResponse
     `;
 var mutations = `
