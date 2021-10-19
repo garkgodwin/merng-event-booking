@@ -15,7 +15,7 @@ const main = async () => {
     .connect(ATLAS_URI)
     .then(async () => {
       console.log("=> Connected to Mongo DB.");
-      await createAdmin();
+      //await createAdmin();
       app.get("/", (req, res) => {
         res.send("HELLO WORLD!");
       });
@@ -30,6 +30,7 @@ const main = async () => {
 
 main();
 
-//TODO: MAKE ERROR HANDLING
-//TODO: LEARN MIDDLEWARES FOR GRAPHQL
-//TODO: FIX THE GRAPHIQL UI TO USE HEADERS
+//TODO: ?MAKE ERROR HANDLING
+//TODO: ?LEARN MIDDLEWARES FOR GRAPHQL
+//TODO: !IMPORTANT - FIX the query getLoggedInData
+//!CHANGE GRAPHQL TO APPOLO

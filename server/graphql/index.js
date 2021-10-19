@@ -5,7 +5,7 @@ const schema = require("./typedefs"); //NormalResponse is in _common.type.js fil
 
 //?queries
 const { getEvents } = require("./queries/event.query");
-const { getUsers, login } = require("./queries/user.query");
+const { getUsers, getLoggedInData, login } = require("./queries/user.query");
 
 //?mutations
 const { createEvent } = require("./mutations/event.mutation");
@@ -15,6 +15,7 @@ var root = {
   getEvents: getEvents,
   createEvent: createEvent,
   getUsers: getUsers,
+  getLoggedInData: getLoggedInData,
   login: login,
   createUser: createUser,
 };
@@ -22,7 +23,8 @@ const graphql = graphqlHTTP({
   schema: schema,
   rootValue: root,
   graphiql: true,
-  customFormatError: (err) => {
+  pretty: true,
+  customFormatErrorFn: (err) => {
     return {
       success: false,
       invalid: false,

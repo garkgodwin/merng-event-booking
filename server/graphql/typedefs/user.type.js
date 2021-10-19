@@ -16,7 +16,7 @@ var types = `
         updatedAt: String!
     }
 
-    type ResponseGetUsers{
+    type UsersResponse{
         success: Boolean!
         invalid: Boolean!
         error: Boolean!
@@ -24,8 +24,15 @@ var types = `
         errors: [String!]!
         users: [User!]!
     }
-
-    type ResponseLogin{
+    type UserResponse{
+        success: Boolean!
+        invalid: Boolean!
+        error: Boolean!
+        message: String!
+        errors: [String!]!
+        user: User!
+    }
+    type TokenResponse{
         success: Boolean!
         invalid: Boolean!
         error: Boolean!
@@ -34,38 +41,30 @@ var types = `
         token: String!
     }
 
-    type ResponseLoggedInData{
-        success: Boolean!
-        invalid: Boolean!
-        error: Boolean!
-        message: String!
-        errors: [String!]!
-        user: User!
-    }
-
-    input InputName{
+    input NameInput{
         first: String!
         middle: String
         last: String!
     }
-    input InputUser{
+
+    input UserInput{
         userType: Int!
-        inputName: InputName!
+        name: NameInput!
         email: String!
         password: String!
     }
-    input InputCredentials{
+    input CredentialsInput{
         email: String!
         password: String!
     }
 `;
 var queries = `
-        getUsers: ResponseGetUsers
-        login(inputCredentials: InputCredentials!): ResponseLogin
-        getLoggedInData(token: String!): ResponseLoggedInData
+        getUsers: UsersResponse
+        getLoggedInData: UserResponse
+        login(input: CredentialsInput): TokenResponse
     `;
 var mutations = `
-        createUser(inputUser: InputUser!): NormalResponse
+        createUser(input: UserInput): NormalResponse
     `;
 var typeUser = {
   types,

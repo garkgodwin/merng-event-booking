@@ -3,6 +3,7 @@ const cors = require("cors");
 //?app
 const app = express();
 
+//const graphql = require("./graphql");
 const graphql = require("./graphql");
 const isAuth = require("./middlewares/auth");
 

@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useQuery } from "@apollo/client";
+//?queries
+import { GET_LOGGED_IN_DATA } from "./graphql/queries/user.queries";
 
 //*STYLES
 import "./App.css";
@@ -9,7 +11,10 @@ import Navbar from "./components/Navbar";
 import Pages from "./pages";
 
 const App = () => {
-  const {}
+  const { loading, error, loggedInData } = useQuery(GET_LOGGED_IN_DATA);
+  useEffect(() => {
+    console.log(loggedInData);
+  }, [loggedInData]);
   return (
     <div className="App">
       <Navbar />

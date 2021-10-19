@@ -55,6 +55,52 @@ module.exports = {
     }
     return response;
   },
+  getLoggedInData: async (args, req) => {
+    let response = {
+      success: false,
+      invalid: false,
+      error: false,
+      message: "",
+      errors: [],
+      user: {},
+    };
+    if (req.isAuth) {
+      //?find user data
+      await User.findOne({ _id: req.userId, email: req.email })
+        .then((result) => {
+          console.log(result);
+          if (result) {
+            response = {
+              ...response,
+              success: true,
+              message: "You are logged-in!",
+              user: result,
+            };
+          } else {
+            response = {
+              ...response,
+              invalid: true,
+              message: "No user with such credentials.",
+            };
+          }
+        })
+        .catch((error) => {
+          response = {
+            ...response,
+            error: true,
+            message: "Encountered an error while logging in.",
+          };
+          response = mongooseErrors(error, response);
+        });
+    } else {
+      response = {
+        ...response,
+        invalid: true,
+        message: "Your credentials are invalid.",
+      };
+    }
+    return response;
+  },
   login: async (args) => {
     let response = {
       success: false,
@@ -64,9 +110,9 @@ module.exports = {
       errors: [],
       token: "",
     };
-    const loginInput = args.loginInput;
-    const email = loginInput.email;
-    const password = loginInput.password;
+    const input = args.input;
+    const email = input.email;
+    const password = input.password;
     const user = await User.findOne({ email: email })
       .then((result) => {
         return result;
@@ -79,7 +125,7 @@ module.exports = {
         };
         response = mongooseErrors(error, response);
       });
-    if (user) {
+    if (user && !response.error) {
       const passwordIsValid = await bcrypt.compare(password, user.password);
       if (passwordIsValid) {
         const token = jwt.sign(
@@ -99,7 +145,7 @@ module.exports = {
           message: "User does not exists.",
         };
       }
-    } else {
+    } else if (!user && !response.error) {
       response = {
         ...response,
         invalid: true,
