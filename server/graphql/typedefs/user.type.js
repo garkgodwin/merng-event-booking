@@ -1,19 +1,19 @@
 var types = `
     type Name {
-        first: String!
+        first: String
         middle: String
-        last: String!
+        last: String
     }
 
     type User {
-        _id: ID!
-        userType: Int!
-        name: Name!
-        email: String!
+        _id: ID
+        userType: Int
+        name: Name
+        email: String
         password: String
-        createdEvents: [Event!]!
-        createdAt: String!
-        updatedAt: String!
+        createdEvents: [Event!]
+        createdAt: String
+        updatedAt: String
     }
 
     type UsersResponse{

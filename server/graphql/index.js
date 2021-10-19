@@ -24,15 +24,6 @@ const graphql = graphqlHTTP({
   rootValue: root,
   graphiql: true,
   pretty: true,
-  customFormatErrorFn: (err) => {
-    return {
-      success: false,
-      invalid: false,
-      error: true,
-      message: err.message,
-      errros: [],
-    };
-  },
 });
 
 module.exports = graphql;
