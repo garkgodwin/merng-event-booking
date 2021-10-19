@@ -30,7 +30,7 @@ var types = `
         error: Boolean!
         message: String!
         errors: [String!]!
-        user: User!
+        user: User
     }
     type TokenResponse{
         success: Boolean!
