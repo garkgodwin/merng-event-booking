@@ -11,14 +11,18 @@ import Navbar from "./components/Navbar";
 import Pages from "./pages";
 
 const App = () => {
-  const { loading, error, loggedInData } = useQuery(GET_LOGGED_IN_DATA);
-  useEffect(() => {
-    console.log(loggedInData);
-  }, [loggedInData]);
+  //?checks if logged in
+  const { loading, error, data } = useQuery(GET_LOGGED_IN_DATA);
+  if (loading) return "LOADING>>>";
+  if (error) return `ERROR: ${error.message}`;
+
+  if (data) {
+    console.log(data);
+  }
   return (
     <div className="App">
-      <Navbar />
-      <Pages />
+      <Navbar loggedInData={data} />
+      <Pages loggedInData={data} />
     </div>
   );
 };
