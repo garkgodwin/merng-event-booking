@@ -8,14 +8,6 @@ var types = `
         createdAt: String!
         updatedAt: String!
     }
-    type EventArrayResponse{
-        success: Boolean!,
-        invalid: Boolean!,
-        error: Boolean!,
-        message: String!,
-        errors: [String!]!,
-        events: [Event!]!
-    }
     input EventInput {
         title: String!
         description: String!
@@ -27,10 +19,10 @@ var types = `
 //?creator: is Schmea.Types.ObjectId = string
 //!TODO change back the creator:String to creator:String! to active no nullable input
 var queries = `
-    getEvents: EventArrayResponse
+    getEvents: [Event!]!
 `;
 var mutations = `
-    createEvent(eventInput: EventInput): NormalResponse
+    createEvent(eventInput: EventInput): String
 `;
 var typeEvent = {
   types,

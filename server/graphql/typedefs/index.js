@@ -4,11 +4,8 @@ const { buildSchema } = require("graphql");
 const typeUser = require("./user.type");
 const typeEvent = require("./event.type");
 const typeBooking = require("./booking.type");
-//?_common typedef
-const typeCommon = require("./_common.type");
 
 var schema = buildSchema(`
-    ${typeCommon.types}
     ${typeUser.types}
     ${typeEvent.types}
     ${typeBooking.types}

@@ -6,72 +6,41 @@ const { mongooseErrors } = require("../../handlers/errorHandlers");
 module.exports = {
   //?ONLY EVENT MANAGERS USERS CAN CREATE
   createEvent: async (args, req) => {
-    let response = {
-      success: false,
-      invalid: false,
-      error: false,
-      message: "",
-      errors: [],
-    };
-    if (req.isAuth) {
-      if (req.userType === 2) {
-        const creator = req.userId; //got from auth middleware
-        const event = new Event({
-          title: args.eventInput.title,
-          description: args.eventInput.description,
-          price: +args.eventInput.price,
-          date: new Date(args.eventInput.date),
-          creator: creator,
-        });
-        return event
-          .save()
-          .then((result) => {
-            return User.findById(creator);
-          })
-          .then((user) => {
-            if (user) {
-              user.createdEvents.push(event);
-              return user.save();
-            } else {
-              response = {
-                ...response,
-                error: true,
-                message:
-                  "User does not exists! Cannot add event without a user.",
-              };
-            }
-          })
-          .then((result) => {
-            response = {
-              ...response,
-              success: true,
-              message: "An event is created.",
-            };
-          })
-          .catch((error) => {
-            response = {
-              ...response,
-              error: true,
-              message: "An error occurred while creating an event.",
-            };
-            if (error.name.includes("Mongo")) {
-              response = mongooseErrors(error, response);
-            }
-          });
-      } else {
-        response = {
-          ...response,
-          invalid: true,
-          message: "User is not a manager.",
-        };
-      }
-    } else {
-      response = {
-        ...response,
-        invalid: true,
-        message: "User is not logged in!",
-      };
-    }
-    return response;
+    //TODO: FIX THIS
+    if (!req.isAuth) throw new Error("Not logged in.");
+    if (req.userType !== 2) throw new Error("User is not a manager.");
+    const creator = req.userId; //!got from auth middleware
+    const event = new Event({
+      title: args.eventInput.title,
+      description: args.eventInput.description,
+      price: +args.eventInput.price,
+      date: new Date(args.eventInput.date),
+      creator: creator,
+    });
+    return event
+      .save() //?SAVE EVENT
+      .then((result) => {
+        return User.findById(creator); //?FIND CREATOR
+      })
+      .then((user) => {
+        if (user) {
+          user.createdEvents.push(event); //?SAVE EVENT ID TO USER CREATED EVENTS
+          return user.save();
+        } else {
+          throw new Error(
+            "User does not exist! Cannot add event without a user."
+          );
+        }
+      })
+      .then((result) => {
+        return "An event is created!";
+      })
+      .catch((error) => {
+        if (error.name.includes("Mongo")) {
+          let errorMessages = mongooseErrors(error);
+          throw new Error(errorMessages);
+        }
+        throw new Error("An error occurred while creating an event.");
+      });
   },
 };

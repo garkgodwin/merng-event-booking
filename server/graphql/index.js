@@ -23,7 +23,12 @@ const graphql = graphqlHTTP({
   schema: schema,
   rootValue: root,
   graphiql: true,
-  pretty: true,
+  customFormatErrorFn: (err) => {
+    if (err.message.startsWith("Database Error: ")) {
+      return new Error("Internal server error");
+    }
+    return err;
+  },
 });
 
 module.exports = graphql;

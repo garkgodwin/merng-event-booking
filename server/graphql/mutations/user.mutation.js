@@ -4,13 +4,6 @@ const bcrypt = require("bcryptjs");
 const { mongooseErrors } = require("../../handlers/errorHandlers");
 
 const createUser = async (args) => {
-  let response = {
-    success: false,
-    invalid: false,
-    error: false,
-    message: "",
-    errors: [],
-  };
   const userInput = args.userInput;
   const nameInput = userInput.nameInput;
   const userType = userInput.userType;
@@ -31,19 +24,14 @@ const createUser = async (args) => {
       });
     })
     .then((result) => {
-      return { ...response, success: true, message: "New user created." };
+      return "New user created.";
     })
     .catch((error) => {
       if (error.name.includes("Mongo")) {
-        response = {
-          ...response,
-          message: "Encountered an error while creating a user.",
-        };
-        return mongooseErrors(error, response);
-      } else {
-        //TODO: ADD MORE ERROR HANDLER (other than mongoservererror)
-        return { ...response, error: true, message: error.message };
+        let errorMessages = mongooseErrors(error);
+        throw new Error(errorMessages);
       }
+      throw new Error("Encountered an error while creating an account.");
     });
 };
 

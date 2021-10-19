@@ -6,15 +6,6 @@ var types = `
         endDate: String!
     }
 
-    type BookingArrayResponse{
-        success: Boolean!
-        invalid: Boolean!
-        error: Boolean!
-        message: String!
-        errors: [String!]!
-        bookings: [Booking!]!
-    }
-
     input BookingInput{
         event: String!
         customer: String!
@@ -25,11 +16,11 @@ var types = `
 `;
 
 var queries = `
-    getBookings: BookingArrayResponse
+    getBookings: [Booking!]!
 `;
 
 var mutations = `
-    addBooking(bookingInput: BookingInput): NormalResponse
+    addBooking(bookingInput: BookingInput): String
 `;
 
 var typeBooking = {

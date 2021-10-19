@@ -11,9 +11,6 @@ export const GET_LOGGED_IN_DATA = gql`
         last
       }
       email
-      createdEvents {
-        _id
-      }
       createdAt
       updatedAt
     }
