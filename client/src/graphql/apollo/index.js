@@ -1,5 +1,5 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
-import { getTokenFromLocal } from "./token";
+import { getTokenFromLocal } from "../../utils/token";
 const client = new ApolloClient({
   uri: "http://localhost:8000/graphql",
   cache: new InMemoryCache(),
