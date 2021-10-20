@@ -1,0 +1,29 @@
+.Input{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0,0,0,0.5);
+    margin-top: 8px;
+    padding: 4px 0 0 0;
+}
+.Input input{
+    background-color: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid white;
+    padding: 0 8px;
+    color: white;
+}
+.Input label{
+    color: white;
+}
+/*FONT_SIZE*/
+.input-s *{
+    font-size: 20px;
+}
+.input-m *{
+    font-size: 24px;
+}
+.input-l *{
+    font-size: 28px;
+}
