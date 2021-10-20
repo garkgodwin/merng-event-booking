@@ -5,12 +5,14 @@ const PORT = process.env.PORT || 8000;
 const ATLAS_URI = process.env.ATLAS_URI;
 const { createAdmin } = require("./seed.js");
 
+const apolloServer = require("./graphql");
 const main = async () => {
-  //*DATABASE
-  /*
-    if database is started, start routes?, if routes started start server
-  */
   console.log("> Connecting to Mongo DB...");
+  //?======================+GRAPH QL+=================
+  await apolloServer.start();
+  apolloServer.applyMiddleware({ app });
+
+  //?========================+DATABASE+=============
   await db.mongoose
     .connect(ATLAS_URI)
     .then(async () => {

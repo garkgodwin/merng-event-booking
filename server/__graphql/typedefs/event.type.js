@@ -19,7 +19,7 @@ var types = `
 //?creator: is Schmea.Types.ObjectId = string
 //!TODO change back the creator:String to creator:String! to active no nullable input
 var queries = `
-    getEvents: [Event]!
+    getEvents: [Event!]!
 `;
 var mutations = `
     createEvent(eventInput: EventInput): String

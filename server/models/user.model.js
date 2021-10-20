@@ -23,12 +23,12 @@ const userSchema = Schema(
     }),
     email: {
       type: String,
-      required: true,
+      required: "Email is required.",
       unique: true,
     },
     password: {
       type: String,
-      required: true,
+      required: "Password is required.",
     },
     createdEvents: [
       {

@@ -1,4 +1,4 @@
-const db = require("../../models/");
+const db = require("../../models");
 const Event = db.events;
 const User = db.users;
 const { mongooseErrors } = require("../../handlers/errorHandlers");
