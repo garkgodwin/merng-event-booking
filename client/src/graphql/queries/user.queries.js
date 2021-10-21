@@ -20,8 +20,6 @@ export const GET_LOGGED_IN_DATA = gql`
 //TODO: FIX LOGININPUT IMPLEMENTATION
 export const LOGIN = gql`
   query login($input: LoginInput!) {
-    login(input: $input) {
-      token
-    }
+    login(input: $input)
   }
 `;

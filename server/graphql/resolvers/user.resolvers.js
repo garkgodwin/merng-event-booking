@@ -51,7 +51,6 @@ exports.getLoggedInData = async (parent, args, req) => {
 };
 
 exports.login = async (parent, args) => {
-  console.log("got here");
   const input = args.input;
   const email = input.email;
   const password = input.password;

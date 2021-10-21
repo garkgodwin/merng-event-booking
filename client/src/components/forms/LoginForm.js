@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { LOGIN } from "../../graphql/queries/user.queries";
 import { useLazyQuery } from "@apollo/client";
 
+//?utils
+import { setTokenToLocal } from "../../utils/token";
+
 import "./LoginForm.css";
 
 //?COMPONENTS
@@ -22,9 +25,14 @@ const LoginForm = () => {
         input: inputs,
       },
     });
-
     if (error) {
-      console.log("error");
+      console.log(error.message);
+    }
+    if (loading) {
+      console.log(loading);
+    }
+    if (data) {
+      setTokenToLocal(data.login);
     }
   };
   const changeEmail = (e) => {
