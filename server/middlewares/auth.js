@@ -4,13 +4,9 @@ const User = db.users;
 require("dotenv").config();
 const SECRET_KEY = process.env.SECRET_KEY;
 
-module.exports = async (req, res, next) => {
+module.exports = (req, res, next) => {
   const authHeader = req.get("Authorization");
   //!set all empty
-  req.isAuth = false;
-  req.userType = false;
-  req.userId = "";
-  req.email = "";
   if (!authHeader) {
     req.isAuth = false;
     return next();
@@ -33,7 +29,7 @@ module.exports = async (req, res, next) => {
     return next();
   }
 
-  await User.findOne({ id: decodedToken.userId, email: decodedToken.email })
+  return User.findOne({ id: decodedToken.userId, email: decodedToken.email })
     .then((result) => {
       if (!result) {
         req.isAuth = false;

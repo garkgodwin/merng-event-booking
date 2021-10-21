@@ -30,7 +30,11 @@ exports.getAllUsers = async (parent, args, req) => {
   return users || [];
 };
 
-exports.getLoggedInData = async (parent, args, req) => {
+exports.getLoggedInData = async (parent, args, req, aa) => {
+  console.log("got here");
+  console.log(parent);
+  console.log(args);
+  console.log(req);
   if (!req.isAuth) throw new Error("User is authenticated.");
   const user = await User.findOne({ _id: req.userId, email: req.email })
     .then((result) => {

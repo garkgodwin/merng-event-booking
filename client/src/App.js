@@ -11,6 +11,9 @@ import Navbar from "./components/Navbar";
 import Pages from "./pages";
 import FullLoader from "./components/loaders/FullLoader";
 
+//?helpers
+import { getTokenFromLocal } from "./utils/token";
+
 const App = () => {
   //?checks if logged in
   const { loading, error, data } = useQuery(GET_LOGGED_IN_DATA);
@@ -18,6 +21,7 @@ const App = () => {
   if (data) {
     console.log(data);
   }
+  console.log(getTokenFromLocal());
   return (
     <div className="App">
       {loading && <FullLoader />}
