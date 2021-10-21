@@ -19,10 +19,7 @@ const LoginForm = () => {
     e.preventDefault();
     login({
       variables: {
-        input: {
-          email: inputs.email,
-          password: inputs.password,
-        },
+        input: inputs,
       },
     });
 
