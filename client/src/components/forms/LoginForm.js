@@ -32,6 +32,7 @@ const LoginForm = () => {
       console.log(loading);
     }
     if (data) {
+      console.log(data);
       setTokenToLocal(data.login);
     }
   };

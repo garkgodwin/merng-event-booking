@@ -7,10 +7,6 @@ import EventCard from "../../components/cards/EventCard";
 
 const Home = () => {
   const { error, loading, data } = useQuery(GET_EVENTS);
-  console.log("DATA: ");
-  console.log(data);
-  console.log("ERROR: " + error);
-  console.log("LOADING: " + loading);
   return (
     <div className="Page page-home">
       <EventCard />

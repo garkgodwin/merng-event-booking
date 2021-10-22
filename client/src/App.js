@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
 //?queries
 import { GET_LOGGED_IN_DATA } from "./graphql/queries/user.queries";
 
@@ -16,12 +16,15 @@ import { getTokenFromLocal } from "./utils/token";
 
 const App = () => {
   //?checks if logged in
-  const { loading, error, data } = useQuery(GET_LOGGED_IN_DATA);
+  const [getLoggedInData, { error, loading, data }] =
+    useLazyQuery(GET_LOGGED_IN_DATA);
 
-  if (data) {
+  useEffect(() => {
+    getLoggedInData();
+    console.log(loading);
+    console.log(error);
     console.log(data);
-  }
-  console.log(getTokenFromLocal());
+  }, []);
   return (
     <div className="App">
       {loading && <FullLoader />}
